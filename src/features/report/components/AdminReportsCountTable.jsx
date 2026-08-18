@@ -77,15 +77,11 @@ export default function AdminReportsCountTable({ services = [], onView }) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Service</TableHead>
-
               <TableHead>Brand</TableHead>
 
               <TableHead>Seller</TableHead>
 
               <TableHead>Rating</TableHead>
-
-              <TableHead>Reviews</TableHead>
 
               <TableHead>Reports</TableHead>
 
@@ -108,27 +104,16 @@ export default function AdminReportsCountTable({ services = [], onView }) {
                   <TableCell>
                     <div className="min-w-37.5">
                       <p className="font-medium">
-                        {service.service_display_name ||
-                          service.service_name ||
-                          "—"}
-                      </p>
-
-                      <p className="mt-0.5 max-w-45 truncate text-xs text-muted-foreground">
-                        {service.slug || "—"}
-                      </p>
-                    </div>
-                  </TableCell>
-
-                  <TableCell>
-                    <div className="min-w-37.5">
-                      <p className="font-medium">
                         {service.brand_display_name ||
                           service.brand_name ||
                           "—"}
                       </p>
 
                       <p className="mt-0.5 max-w-45 truncate text-xs text-muted-foreground">
-                        {service.brand_name || "—"}
+                        Service :{" "}
+                        {service.service_display_name ||
+                          service.service_name ||
+                          "—"}
                       </p>
                     </div>
                   </TableCell>
@@ -149,10 +134,6 @@ export default function AdminReportsCountTable({ services = [], onView }) {
                     <span className="text-sm font-medium">
                       {service.rating ?? "0.00"}
                     </span>
-                  </TableCell>
-
-                  <TableCell>
-                    <span className="text-sm">{service.review_count ?? 0}</span>
                   </TableCell>
 
                   <TableCell>

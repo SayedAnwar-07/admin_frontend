@@ -18,10 +18,11 @@ const ADMIN_LOGIN_URL = "/users/amar-admin/login/";
 const TOKEN_REFRESH_URL = "/users/token/refresh/";
 
 // Admin protected API prefixes.
-//
-// Reports are also admin-only even though
-// they are not under /users/amar-admin/.
-const ADMIN_API_PREFIXES = ["/users/amar-admin/", "/reports/admin/"];
+const ADMIN_API_PREFIXES = [
+  "/users/amar-admin/",
+  "/reports/admin/",
+  "/event-services/admin/",
+];
 
 // ── Axios instances ───────────────────────────────────────────────────────────
 

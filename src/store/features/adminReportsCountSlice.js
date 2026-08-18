@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "@/store/constant/api";
 import getApiErrorPayload from "@/store/constant/getApiErrorPayload";
 
-const ADMIN_SERVICES_URL = "/admin/services/";
+const ADMIN_SERVICES_URL = "/event-services/admin/services/";
 
 const normalizeServiceList = (data) => {
   if (Array.isArray(data)) {
@@ -34,7 +34,6 @@ const normalizeServiceList = (data) => {
 
 export const fetchAdminReportsCount = createAsyncThunk(
   "adminReportsCount/fetchAdminReportsCount",
-
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get(ADMIN_SERVICES_URL);
@@ -48,10 +47,11 @@ export const fetchAdminReportsCount = createAsyncThunk(
 
 export const fetchAdminServiceReportDetail = createAsyncThunk(
   "adminReportsCount/fetchAdminServiceReportDetail",
-
   async (serviceId, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/admin/services/${serviceId}/`);
+      const response = await api.get(
+        `/event-services/admin/services/${serviceId}/`,
+      );
 
       return response.data;
     } catch (error) {
@@ -62,21 +62,16 @@ export const fetchAdminServiceReportDetail = createAsyncThunk(
 
 const initialState = {
   services: [],
-
   count: 0,
-
   next: null,
-
   previous: null,
 
   selectedService: null,
 
   loading: false,
-
   detailLoading: false,
 
   error: null,
-
   detailError: null,
 };
 
@@ -100,7 +95,6 @@ const adminReportsCountSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-
       .addCase(fetchAdminReportsCount.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -110,11 +104,8 @@ const adminReportsCountSlice = createSlice({
         state.loading = false;
 
         state.services = action.payload.services;
-
         state.count = action.payload.count;
-
         state.next = action.payload.next;
-
         state.previous = action.payload.previous;
 
         state.error = null;
@@ -136,15 +127,12 @@ const adminReportsCountSlice = createSlice({
 
       .addCase(fetchAdminServiceReportDetail.fulfilled, (state, action) => {
         state.detailLoading = false;
-
         state.selectedService = action.payload;
-
         state.detailError = null;
       })
 
       .addCase(fetchAdminServiceReportDetail.rejected, (state, action) => {
         state.detailLoading = false;
-
         state.selectedService = null;
 
         state.detailError = action.payload || {

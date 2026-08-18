@@ -3,6 +3,7 @@ import {
   Store,
   Users,
   FileWarning,
+  TriangleAlert,
   Settings,
 } from "lucide-react";
 
@@ -28,9 +29,9 @@ export const navItems = [
     icon: FileWarning,
   },
   {
-    label: "Report Count",
+    label: "Reported Services",
     to: "/reports/count",
-    icon: FileWarning,
+    icon: TriangleAlert,
   },
   {
     label: "Settings",

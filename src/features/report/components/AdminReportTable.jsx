@@ -1,4 +1,4 @@
-import { Eye, Loader2, Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/table";
 
 import ReportStatusChanger from "./ReportStatusChanger";
+import ReportMessageDialog from "./ReportMessageDialog";
+import ReportImageDialog from "./ReportImageDialog";
 
 // ============================================================================
 // Helpers
@@ -34,18 +36,6 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-const truncateText = (text, maxLength = 90) => {
-  if (!text) {
-    return "—";
-  }
-
-  if (text.length <= maxLength) {
-    return text;
-  }
-
-  return `${text.slice(0, maxLength)}...`;
-};
-
 // ============================================================================
 // Admin report table
 // ============================================================================
@@ -58,8 +48,6 @@ export default function AdminReportTable({
   deletingReportId = null,
 
   onStatusChange,
-
-  onView,
 
   onDelete,
 }) {
@@ -185,7 +173,9 @@ export default function AdminReportTable({
                       className="max-w-70 text-sm leading-5 text-muted-foreground"
                       title={report.message || undefined}
                     >
-                      {truncateText(report.message)}
+                      <TableCell>
+                        <ReportMessageDialog message={report.message} />
+                      </TableCell>
                     </p>
                   </TableCell>
 
@@ -219,21 +209,12 @@ export default function AdminReportTable({
 
                   <TableCell>
                     <div className="flex items-center justify-end gap-1">
-                      {/* View */}
+                      {/* Image preview */}
 
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        className="size-8"
-                        title="View report"
+                      <ReportImageDialog
+                        imageUrl={report.image_url}
                         disabled={isDeleting}
-                        onClick={() => onView?.(report.id)}
-                      >
-                        <Eye className="size-4" />
-
-                        <span className="sr-only">View report</span>
-                      </Button>
+                      />
 
                       {/* Delete */}
 
@@ -241,7 +222,7 @@ export default function AdminReportTable({
                         type="button"
                         variant="ghost"
                         size="icon"
-                        className="size-8 text-destructive hover:bg-destructive/10 hover:text-destructive"
+                        className="size-8 text-destructive hover:bg-destructive/10 hover:text-destructive cursor-pointer"
                         title="Delete report"
                         disabled={isDeleting || isStatusUpdating}
                         onClick={() => onDelete?.(report)}
