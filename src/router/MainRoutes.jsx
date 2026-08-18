@@ -7,6 +7,8 @@ import SettingsPage from "@/pages/SettingsPage";
 import LoginPage from "@/pages/LoginPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import AdminReportsPage from "@/features/report/pages/AdminReportsPage";
+import AdminReportsCountPage from "@/features/report/pages/AdminReportsCountPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
           { path: "settings", element: <SettingsPage /> },
           { path: "sellers", element: <SellerPage /> },
           { path: "customers", element: <CustomerPage /> },
+          { path: "reports", element: <AdminReportsPage /> },
+          { path: "reports/count", element: <AdminReportsCountPage /> },
         ],
       },
     ],

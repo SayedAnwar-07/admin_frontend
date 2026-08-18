@@ -6,8 +6,17 @@ export default function PrivateRoute() {
 
   const { isAuthenticated, adminUser } = useSelector((state) => state.admin);
 
-  const hasToken = Boolean(localStorage.getItem("accessToken"));
-  const isLoggedIn = isAuthenticated || (hasToken && adminUser);
+  let hasAccessToken = false;
+
+  try {
+    hasAccessToken = Boolean(localStorage.getItem("accessToken"));
+  } catch {
+    hasAccessToken = false;
+  }
+
+  const isAdmin = adminUser?.is_staff === true;
+
+  const isLoggedIn = isAuthenticated && hasAccessToken && isAdmin;
 
   if (!isLoggedIn) {
     return <Navigate to="/login" replace state={{ from: location }} />;

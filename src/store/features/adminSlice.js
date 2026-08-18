@@ -31,7 +31,7 @@ const getStoredAdminUser = () => {
 
     // AdminLoginSerializer authorizes using is_staff.
     // role === "admin" is kept only as a compatibility fallback.
-    const isAdmin = user?.is_staff === true || user?.role === "admin";
+    const isAdmin = user?.is_staff === true;
 
     return isAdmin ? user : null;
   } catch {
