@@ -154,7 +154,11 @@ export default function AdminReportsCountPage() {
 
         {error && <GlobalErrorMessage error={error} />}
 
-        <AdminReportsCountTable services={services} />
+        <AdminReportsCountTable
+          services={services.filter(
+            (service) => Number(service.report_count || 0) > 0,
+          )}
+        />
       </section>
     </div>
   );

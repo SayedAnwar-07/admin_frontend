@@ -31,30 +31,37 @@ const formatDate = (dateString) => {
 const getReportCountStyle = (count) => {
   const reportCount = Number(count || 0);
 
-  if (reportCount >= 5) {
+  if (reportCount >= 10) {
     return {
       className: "border-red-200 bg-red-50 text-red-700",
-      label: "High",
+      label: "Critical Review",
+    };
+  }
+
+  if (reportCount >= 5) {
+    return {
+      className: "border-orange-200 bg-orange-50 text-orange-700",
+      label: "High Risk",
     };
   }
 
   if (reportCount >= 3) {
     return {
-      className: "border-orange-200 bg-orange-50 text-orange-700",
-      label: "Attention",
+      className: "border-yellow-200 bg-yellow-50 text-yellow-700",
+      label: "Needs Attention",
     };
   }
 
   if (reportCount >= 1) {
     return {
-      className: "border-amber-200 bg-amber-50 text-amber-700",
-      label: "Reported",
+      className: "border-blue-200 bg-blue-50 text-blue-700",
+      label: "Under Review",
     };
   }
 
   return {
     className: "border-emerald-200 bg-emerald-50 text-emerald-700",
-    label: "Clear",
+    label: "No Issues",
   };
 };
 
